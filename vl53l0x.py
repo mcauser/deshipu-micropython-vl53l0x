@@ -304,6 +304,7 @@ class VL53L0X:
           (0x00, 0x01),
           (0xFF, 0x00),
         )
+        self._started = False
 
     def read(self):
         if not self._started:
