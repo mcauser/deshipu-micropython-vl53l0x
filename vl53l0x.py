@@ -68,6 +68,8 @@ class VL53L0X:
         # I2C standard mode
         self._config(
             (0x88, 0x00),
+
+            (0x80, 0x01),
             (0xff, 0x01),
             (0x00, 0x00),
         )
@@ -79,11 +81,12 @@ class VL53L0X:
         )
 
         # disable signal_rate_msrc and signal_rate_pre_range limit checks
-        self._flag(_MSRC_CONFIG, 2, True)
-        self._flag(_MSRC_CONFIG, 3, True)
+        self._flag(_MSRC_CONFIG, 1, True)
+        self._flag(_MSRC_CONFIG, 4, True)
 
         # rate_limit = 0.25
-        self._register(_FINAL_RATE_RTN_LIMIT, int(0.25 * (1 << 7)), struct='>H')
+        self._register(_FINAL_RATE_RTN_LIMIT, int(0.25 * (1 << 7)),
+                       struct='>H')
 
         self._register(_SYSTEM_SEQUENCE, 0xff)
 
